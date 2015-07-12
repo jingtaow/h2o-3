@@ -6,6 +6,7 @@ import hex.Grid;
 import hex.Model;
 import org.junit.*;
 import water.DKV;
+import water.Key;
 import water.TestUtil;
 import water.fvec.Frame;
 
@@ -26,7 +27,7 @@ public class KMeansGridTest extends TestUtil {
       fr = parse_test_file("smalldata/iris/iris_wheader.csv");
 
       // Get the Grid for this modeling class and frame
-      kmg = KMeansGrid.get(fr);
+      kmg = KMeansGrid.get(Key.make("kmeans_grid"), fr);
 
       // 4-dimensional hyperparameter search
       HashMap<String, Object[]> hyperParms = new HashMap<>();
@@ -74,7 +75,7 @@ public class KMeansGridTest extends TestUtil {
       DKV.put(fr);
 
       // Get the Grid for this modeling class and frame
-      kmg = KMeansGrid.get(fr);
+      kmg = KMeansGrid.get(Key.make("kmeans_grid"), fr);
 
       // Setup hyperparameter search space
       HashMap<String, Object[]> hyperParms = new HashMap<>();
@@ -116,7 +117,7 @@ public class KMeansGridTest extends TestUtil {
       DKV.put(fr);
 
       // Get the Grid for this modeling class and frame
-      kmg = KMeansGrid.get(fr);
+      kmg = KMeansGrid.get(Key.make("kmeans_grid"), fr);
 
       // Setup hyperparameter search space
       HashMap<String, Object[]> hyperParms = new HashMap<>();
@@ -162,7 +163,7 @@ public class KMeansGridTest extends TestUtil {
       DKV.put(fr);
 
       // Get the Grid for this modeling class and frame
-      kmg = KMeansGrid.get(fr);
+      kmg = KMeansGrid.get(Key.make("kmeans_grid"), fr);
 
       // Setup random hyperparameter search space
       HashMap<String, Object[]> hyperParms = new HashMap<>();

@@ -6,6 +6,7 @@ import hex.Model;
 import java.util.*;
 import org.junit.*;
 import water.DKV;
+import water.Key;
 import water.TestUtil;
 import water.fvec.Frame;
 import water.fvec.Vec;
@@ -27,7 +28,7 @@ public class DRFGridTest extends TestUtil {
       DKV.put(fr);
 
       // Get the Grid for this modeling class and frame
-      drfg = DRFGrid.get(fr);
+      drfg = DRFGrid.get(Key.make("drf_grid"), fr);
 
       // Setup hyperparameter search space
       HashMap<String,Object[]> hyperParms = new HashMap<>();
@@ -70,7 +71,7 @@ public class DRFGridTest extends TestUtil {
       DKV.put(fr);
 
       // Get the Grid for this modeling class and frame
-      drfg = DRFGrid.get(fr);
+      drfg = DRFGrid.get(Key.make("drf_grid"), fr);
 
       // Setup random hyperparameter search space
       HashMap<String, Object[]> hyperParms = new HashMap<>();
@@ -114,7 +115,7 @@ public class DRFGridTest extends TestUtil {
       DKV.put(fr);
 
       // Get the Grid for this modeling class and frame
-      drfg = DRFGrid.get(fr);
+      drfg = DRFGrid.get(Key.make("drf_grid"), fr);
 
       // Setup random hyperparameter search space
       HashMap<String, Object[]> hyperParms = new HashMap<>();

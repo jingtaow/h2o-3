@@ -1,6 +1,7 @@
 package hex;
 
 import water.Job;
+import water.Key;
 import water.api.Handler;
 import water.api.JobV3;
 import water.api.ModelParametersSchema;
@@ -25,21 +26,22 @@ public abstract class GridSearchHandler< G extends Grid<MP, G>,
     // TODO: Verify inputs, make sure to reject wrong training_frame
 
     // Get/create a grid for given frame
-    G gridBuilder = gridSearchSchema.fillImpl(createGrid(parameters.training_frame.key().get()));
+    Key<Grid> destKey = gridSearchSchema.grid_id != null ? gridSearchSchema.grid_id.key() : null;
+    G gridBuilder = gridSearchSchema.fillImpl(createGrid(destKey, parameters.training_frame.key().get()));
     // Start grid search and return the schema back with job key
-    Grid.GridSearch gs = gridBuilder.startGridSearch((MP) parameters.createAndFillImpl(),
-                                                      gridSearchSchema.grid_parameters);
+    Grid.GridSearch gsJob = gridBuilder.startGridSearch((MP) parameters.createAndFillImpl(),
+                                                      gridSearchSchema.hyper_parameters);
     // Fill schema with job parameters
     // FIXME: right now we have to remove grid parameters which we sent
-    gridSearchSchema.grid_parameters = null;
-    gridSearchSchema.total_models = gs._total_models;
-    gridSearchSchema.job = (JobV3) Schema.schema(version, Job.class).fillFromImpl(gs);
+    gridSearchSchema.hyper_parameters = null;
+    gridSearchSchema.total_models = gsJob._total_models;
+    gridSearchSchema.job = (JobV3) Schema.schema(version, Job.class).fillFromImpl(gsJob);
 
     return gridSearchSchema;
   }
 
   // Force underlying handlers to create their grid implementations
   // - In the most of cases the call needs to be forwarded to GridSearch factory
-  protected abstract G createGrid(Frame f);
+  protected abstract G createGrid(Key<Grid> destKey, Frame f);
 }
 

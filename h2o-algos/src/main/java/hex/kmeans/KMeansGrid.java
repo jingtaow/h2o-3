@@ -64,8 +64,8 @@ public class KMeansGrid extends Grid<KMeansModel.KMeansParameters, KMeansGrid> {
 
   // Factory for returning a grid based on an algorithm flavor
   private KMeansGrid( Key key, Frame fr ) { super(key,fr); }
-  public static KMeansGrid get( Frame fr ) { 
-    Key k = Grid.keyName(MODEL_NAME, fr);
+  public static KMeansGrid get(Key<Grid> destKey, Frame fr) {
+    Key k = destKey != null ? destKey : Grid.keyName(MODEL_NAME, fr);
     KMeansGrid kmg = DKV.getGet(k);
     if( kmg != null ) return kmg;
     kmg = new KMeansGrid(k,fr);

@@ -1,10 +1,12 @@
 package hex.api;
 
+import hex.Grid;
 import hex.GridSearchHandler;
 import hex.schemas.DRFGridSearchV99;
 import hex.schemas.DRFV3;
 import hex.tree.drf.DRFGrid;
 import hex.tree.drf.DRFModel;
+import water.Key;
 import water.fvec.Frame;
 
 /**
@@ -23,7 +25,7 @@ public class DRFGridSearchHandler extends GridSearchHandler<DRFGrid,
   }
 
   @Override
-  protected DRFGrid createGrid(Frame f) {
-    return DRFGrid.get(f);
+  protected DRFGrid createGrid(Key<Grid> destKey, Frame f) {
+    return DRFGrid.get(destKey, f);
   }
 }

@@ -1,10 +1,12 @@
 package hex.api;
 
+import hex.Grid;
 import hex.GridSearchHandler;
 import hex.schemas.GBMGridSearchV99;
 import hex.schemas.GBMV3;
 import hex.tree.gbm.GBMGrid;
 import hex.tree.gbm.GBMModel;
+import water.Key;
 import water.fvec.Frame;
 
 /**
@@ -23,7 +25,7 @@ public class GBMGridSearchHandler extends GridSearchHandler<GBMGrid,
   }
 
   @Override
-  protected GBMGrid createGrid(Frame f) {
-    return GBMGrid.get(f);
+  protected GBMGrid createGrid(Key<Grid> destKey, Frame f) {
+    return GBMGrid.get(destKey, f);
   }
 }

@@ -45,7 +45,10 @@ public /*abstract*/ class Grid<MP extends Model.Parameters, G extends Grid<MP, G
   // A cache of double[] hyper-parameters mapping to Models
   final IcedHashMap<Group,Key<Model>> _cache = new IcedHashMap<>();
 
-  protected Grid( Key key, Frame fr ) { super(key); _fr = fr; }
+  public Grid(Key key, Frame fr) {
+    super(key);
+    _fr = fr;
+  }
 
   /** @return Model name */
   protected /*abstract*/ String modelName() { throw H2O.fail(); }
@@ -98,7 +101,7 @@ public /*abstract*/ class Grid<MP extends Model.Parameters, G extends Grid<MP, G
       for( int j=0; j<os.length; j++ )
         ds[j] = ReflectionUtils.asDouble(os[j]);
     }
-    if( hypers != null && cnt != hypers.size() )  // Quicky error check for unknow parms
+    if( hypers != null && cnt != hypers.size() )  // Quick error check for unknown parms
       for( String s : hypers.keySet() )
         if( ArrayUtils.find(ss, s) == -1 )
           throw new IllegalArgumentException("Unkown hyper-parameter "+s);
@@ -118,6 +121,10 @@ public /*abstract*/ class Grid<MP extends Model.Parameters, G extends Grid<MP, G
    *  @return A model run with these parameters, or null if the model does not exist. */
   public Key<Model> model( double[] hypers ) { return _cache.get(new Group(hypers)); }
   public Key<Model> model( Map<String,Object> hypers ) { return model(hyper2double(hypers)); }
+
+  public Key<Model>[] getModels() {
+    return _cache.values().toArray(new Key[_cache.size()]);
+  }
 
   /**
    *  Get a new model builder for given default parameters and hyper parameters.
@@ -169,7 +176,8 @@ public /*abstract*/ class Grid<MP extends Model.Parameters, G extends Grid<MP, G
   /** @param hypers A set of hyper parameter values
    *  @return A model run with these parameters, typically built on demand and
    *  cached - expected to be an expensive operation.  If the model in question
-   *  is "in progress", a 2nd build will NOT be kicked off.  This is a blocking call. */
+   *  is "in progress", a 2nd build will NOT be kicked off.
+   *  This is a blocking call. */
   private Model buildModel(MP params, double[] hypers ) {
     Key<Model> key = model(hypers);
     if( key != null ) return key.get();

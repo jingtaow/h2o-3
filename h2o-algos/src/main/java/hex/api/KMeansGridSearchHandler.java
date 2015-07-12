@@ -1,10 +1,12 @@
 package hex.api;
 
+import hex.Grid;
 import hex.GridSearchHandler;
 import hex.kmeans.KMeansGrid;
 import hex.kmeans.KMeansModel;
 import hex.schemas.KMeansGridSearchV99;
 import hex.schemas.KMeansV3;
+import water.Key;
 import water.fvec.Frame;
 
 /**
@@ -23,7 +25,7 @@ public class KMeansGridSearchHandler extends GridSearchHandler<KMeansGrid,
   }
 
   @Override
-  protected KMeansGrid createGrid(Frame f) {
-    return KMeansGrid.get(f);
+  protected KMeansGrid createGrid(Key<Grid> destKey, Frame f) {
+    return KMeansGrid.get(destKey, f);
   }
 }

@@ -65,8 +65,8 @@ public class DRFGrid extends SharedTreeGrid<DRFModel.DRFParameters, DRFGrid> {
 
   // Factory for returning a grid based on an algorithm flavor
   private DRFGrid( Key key, Frame fr ) { super(key,fr); }
-  public static DRFGrid get( Frame fr ) { 
-    Key k = Grid.keyName(MODEL_NAME, fr);
+  public static DRFGrid get( Key<Grid> destKey, Frame fr ) {
+    Key k = destKey != null ? destKey : Grid.keyName(MODEL_NAME, fr);
     DRFGrid kmg = DKV.getGet(k);
     if( kmg != null ) return kmg;
     kmg = new DRFGrid(k,fr);

@@ -69,8 +69,8 @@ public class GBMGrid extends SharedTreeGrid<GBMModel.GBMParameters, GBMGrid> {
     super(key,fr);
   }
 
-  public static GBMGrid get( Frame fr ) { 
-    Key k = Grid.keyName(MODEL_NAME, fr);
+  public static GBMGrid get(Key<Grid> destKey, Frame fr) {
+    Key k = destKey != null ? destKey : Grid.keyName(MODEL_NAME, fr);
     GBMGrid kmg = DKV.getGet(k);
     if( kmg != null ) return kmg;
     kmg = new GBMGrid(k,fr);

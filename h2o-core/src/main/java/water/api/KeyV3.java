@@ -1,5 +1,6 @@
 package water.api;
 
+import hex.Grid;
 import hex.Model;
 import water.*;
 import water.exceptions.H2OIllegalArgumentException;
@@ -85,6 +86,8 @@ public class KeyV3<I extends Iced, S extends KeyV3<I, S, K>, K extends Keyed> ex
       return KeyV3.make(ModelKeyV3.class, key);
     else if (Vec.class.isAssignableFrom(keyed_class))
       return KeyV3.make(VecKeyV3.class, key);
+    else if (Grid.class.isAssignableFrom(keyed_class))
+      return KeyV3.make(GridKeyV3.class, key);
     else
       return KeyV3.make(KeyV3.class, key);
   }
@@ -113,6 +116,15 @@ public class KeyV3<I extends Iced, S extends KeyV3<I, S, K>, K extends Keyed> ex
     }
 
     public VecKeyV3(Key<Vec> key) {
+      super(key);
+    }
+  }
+
+  public static class GridKeyV3 extends KeyV3<Iced, GridKeyV3, Grid> {
+    public GridKeyV3() {
+    }
+
+    public GridKeyV3(Key<Grid> key) {
       super(key);
     }
   }

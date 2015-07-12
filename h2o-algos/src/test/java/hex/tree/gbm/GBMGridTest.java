@@ -7,6 +7,7 @@ import hex.tree.SharedTreeModel;
 import java.util.*;
 import org.junit.*;
 import water.DKV;
+import water.Key;
 import water.TestUtil;
 import water.fvec.Frame;
 import water.fvec.Vec;
@@ -28,7 +29,7 @@ public class GBMGridTest extends TestUtil {
       DKV.put(fr);
 
       // Get the Grid for this modeling class and frame
-      gbmg = GBMGrid.get(fr);
+      gbmg = GBMGrid.get(Key.make("gbm_grid"), fr);
 
       // Setup hyperparameter search space
       HashMap<String,Object[]> hyperParms = new HashMap<>();
@@ -72,7 +73,7 @@ public class GBMGridTest extends TestUtil {
       DKV.put(fr);
 
       // Get the Grid for this modeling class and frame
-      gbmg = GBMGrid.get(fr);
+      gbmg = GBMGrid.get(Key.make("gbm_grid"), fr);
 
       // Setup random hyperparameter search space
       HashMap<String, Object[]> hyperParms = new HashMap<>();
@@ -116,7 +117,7 @@ public class GBMGridTest extends TestUtil {
       DKV.put(fr);
 
       // Get the Grid for this modeling class and frame
-      gbmg = GBMGrid.get(fr);
+      gbmg = GBMGrid.get(Key.make("gbm_grid"), fr);
 
       // Setup random hyperparameter search space
       HashMap<String, Object[]> hyperParms = new HashMap<>();
