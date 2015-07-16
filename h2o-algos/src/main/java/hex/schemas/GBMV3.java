@@ -13,8 +13,15 @@ public class GBMV3 extends SharedTreeV3<GBM,GBMV3,GBMV3.GBMParametersV3> {
 				"model_id",
 				"training_frame",
 				"validation_frame",
+<<<<<<< HEAD
                 "nfolds",
                 "keep_cross_validation_splits",
+=======
+        "nfolds",
+        "keep_cross_validation_splits",
+        "fold_assignment",
+        "fold_column",
+>>>>>>> 7653461330c778d5a6cecae664e39a6e0979bb63
 				"response_column",
 				"ignored_columns",
 				"ignore_const_cols",
