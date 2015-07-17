@@ -33,6 +33,9 @@ public class ModelSchemaBase<M extends Iced, S extends Schema<M, S>>
   @API(help="The pretty algo name for this Model (e.g., Generalized Linear Model, rather than GLM).", direction=API.Direction.OUTPUT)
   public String algo_full_name;
 
+  @API(help="The name of the response column for this Model, if applicable.", direction=API.Direction.OUTPUT)
+  public String response_column_name;
+
   public ModelSchemaBase(Model m) {
 
     super();
